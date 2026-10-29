@@ -112,102 +112,102 @@ export const OverviewPage: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="mt-3 pt-3 border-t border-emerald-800/50 flex items-center justify-between text-[11px] text-emerald-300/80">
+        <div className="mt-3 pt-3 border-t border-emerald-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-emerald-300/80">
           <span>Notice: All metrics, buyer profiles, and indicative prices are simulated for academic demonstration.</span>
-          <span className="font-mono">Local Rules Engine v1.0</span>
+          <span className="font-mono sm:shrink-0">Local Rules Engine v1.0</span>
         </div>
       </div>
 
       {/* 6 Key KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-2.5 sm:gap-4">
         {/* Card 1: Total Residue */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Available Residue</span>
-            <div className="p-2 bg-emerald-50 rounded-lg text-emerald-700">
-              <Scale className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Available</span>
+            <div className="p-1.5 sm:p-2 bg-emerald-50 rounded-lg text-emerald-700">
+              <Scale className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">
             {analytics.availableResidueTonnes.toLocaleString()}{' '}
-            <span className="text-sm font-normal text-slate-500">t</span>
+            <span className="text-xs sm:text-sm font-normal text-slate-500">t</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-            <span className="text-emerald-700 font-semibold">{analytics.totalResidueTonnes} t total</span>
-            <span>in system</span>
+          <div className="text-[10px] sm:text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+            <span className="text-emerald-700 font-semibold">{analytics.totalResidueTonnes} t</span>
+            <span>total</span>
           </div>
         </div>
 
         {/* Card 2: Listed Batches */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Listed Batches</span>
-            <div className="p-2 bg-blue-50 rounded-lg text-blue-700">
-              <Boxes className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Batches</span>
+            <div className="p-1.5 sm:p-2 bg-blue-50 rounded-lg text-blue-700">
+              <Boxes className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">{analytics.totalBatchesCount}</div>
-          <div className="text-[11px] text-slate-500 mt-1">
-            <span className="text-blue-700 font-semibold">{analytics.availableBatchesCount} open</span> for matching
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">{analytics.totalBatchesCount}</div>
+          <div className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
+            <span className="text-blue-700 font-semibold">{analytics.availableBatchesCount} open</span> for match
           </div>
         </div>
 
         {/* Card 3: Potential Buyers */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Buyer Network</span>
-            <div className="p-2 bg-purple-50 rounded-lg text-purple-700">
-              <Building2 className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Buyers</span>
+            <div className="p-1.5 sm:p-2 bg-purple-50 rounded-lg text-purple-700">
+              <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">{analytics.totalBuyersCount}</div>
-          <div className="text-[11px] text-slate-500 mt-1">
-            <span className="text-purple-700 font-semibold">{analytics.activeBuyersCount} active</span> industrial plants
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">{analytics.totalBuyersCount}</div>
+          <div className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
+            <span className="text-purple-700 font-semibold">{analytics.activeBuyersCount} active</span> plants
           </div>
         </div>
 
         {/* Card 4: Successful Matches */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Simulated Matches</span>
-            <div className="p-2 bg-teal-50 rounded-lg text-teal-700">
-              <CheckCircle2 className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Matches</span>
+            <div className="p-1.5 sm:p-2 bg-teal-50 rounded-lg text-teal-700">
+              <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">{analytics.matchedBatchesCount}</div>
-          <div className="text-[11px] text-teal-700 font-medium mt-1">
-            {analytics.matchAcceptanceRatePercent}% acceptance rate
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">{analytics.matchedBatchesCount}</div>
+          <div className="text-[10px] sm:text-[11px] text-teal-700 font-medium mt-1">
+            {analytics.matchAcceptanceRatePercent}% accept rate
           </div>
         </div>
 
         {/* Card 5: Estimated Value */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Matched Value</span>
-            <div className="p-2 bg-amber-50 rounded-lg text-amber-700">
-              <IndianRupee className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Matched Val</span>
+            <div className="p-1.5 sm:p-2 bg-amber-50 rounded-lg text-amber-700">
+              <IndianRupee className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">
             ₹{(analytics.totalEstimatedValueInr / 100000).toFixed(1)}{' '}
-            <span className="text-sm font-normal text-slate-500">Lakh</span>
+            <span className="text-xs sm:text-sm font-normal text-slate-500">L</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-1">
-            Gross simulated value
+          <div className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
+            Simulated value
           </div>
         </div>
 
         {/* Card 6: Awaiting Collection */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
-          <div className="flex items-center justify-between text-slate-500 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Awaiting Haulage</span>
-            <div className="p-2 bg-orange-50 rounded-lg text-orange-700">
-              <Truck className="w-4 h-4" />
+        <div className="bg-white rounded-xl p-3 sm:p-4 border border-slate-200 shadow-2xs hover:shadow-xs transition">
+          <div className="flex items-center justify-between text-slate-500 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider">Haulage</span>
+            <div className="p-1.5 sm:p-2 bg-orange-50 rounded-lg text-orange-700">
+              <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-slate-900">{analytics.awaitingCollectionCount}</div>
-          <div className="text-[11px] text-orange-700 font-medium mt-1">
-            Batches in logistics queue
+          <div className="text-xl sm:text-2xl font-bold text-slate-900">{analytics.awaitingCollectionCount}</div>
+          <div className="text-[10px] sm:text-[11px] text-orange-700 font-medium mt-1">
+            In queue
           </div>
         </div>
       </div>
@@ -429,7 +429,49 @@ export const OverviewPage: React.FC = () => {
           </Link>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* MOBILE ADAPTIVE VIEW (Screens < md) */}
+        <div className="md:hidden space-y-3">
+          {topMatches.map(({ batch, match }) => (
+            <div
+              key={`overview-m-${batch.id}`}
+              className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200/80 space-y-2.5"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="font-mono font-bold text-slate-800 text-xs">{batch.id}</span>
+                  <div className="text-[11px] text-slate-500 font-medium">{batch.residueType} • {batch.district}</div>
+                </div>
+                <span className="inline-block px-2 py-0.5 rounded font-black text-xs bg-emerald-100 text-emerald-800">
+                  {match.compatibilityScore}/100
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
+                <div>
+                  <div className="font-bold text-emerald-900 text-xs">{match.buyer.companyName}</div>
+                  <div className="text-[10px] text-slate-400">{match.buyer.industryCategory} ({match.distanceKm} km)</div>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] text-slate-400 block">Est. Gross</span>
+                  <strong className="text-slate-900 font-bold">₹{match.potentialGrossValue?.toLocaleString('en-IN') || 'N/A'}</strong>
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between">
+                <span className="text-[11px] text-slate-500 font-medium">{batch.quantityTonnes} Tonnes</span>
+                <button
+                  onClick={() => navigate('/matching', { state: { selectedBatchId: batch.id } })}
+                  className="px-3 py-1 text-xs font-bold text-emerald-800 bg-white hover:bg-emerald-700 hover:text-white border border-emerald-300 rounded-lg shadow-2xs transition"
+                >
+                  Inspect Match →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* DESKTOP TABLE (Screens >= md) */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50/70 text-slate-500 uppercase tracking-wider font-semibold">

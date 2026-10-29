@@ -162,16 +162,16 @@ export const DemoScenarioModal: React.FC<DemoScenarioModalProps> = ({ isOpen, on
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-fadeIn">
-      <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-2xl w-full p-6 relative flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-3 sm:p-4 animate-fadeIn">
+      <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-2xl w-full p-4 sm:p-6 relative flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-slate-100 pb-4">
+        <div className="flex items-start justify-between border-b border-slate-100 pb-3 sm:pb-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 mb-1.5">
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 text-emerald-800 mb-1">
               <Sparkles className="w-3.5 h-3.5" />
-              Repeatable Presentation Scenario • Step {currentStep.number} of {steps.length}
+              Scenario Step {currentStep.number} of {steps.length}
             </div>
-            <h2 className="text-xl font-bold text-slate-900">{currentStep.title}</h2>
+            <h2 className="text-base sm:text-xl font-bold text-slate-900 leading-snug">{currentStep.title}</h2>
           </div>
           <button
             onClick={onClose}
@@ -228,8 +228,8 @@ export const DemoScenarioModal: React.FC<DemoScenarioModalProps> = ({ isOpen, on
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-between border-t border-slate-100 pt-4 mt-2">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-2.5 border-t border-slate-100 pt-3 sm:pt-4 mt-2">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
             <button
               disabled={currentStepIndex === 0}
               onClick={() => setCurrentStepIndex((prev) => Math.max(0, prev - 1))}
@@ -258,9 +258,9 @@ export const DemoScenarioModal: React.FC<DemoScenarioModalProps> = ({ isOpen, on
 
           <button
             onClick={handleExecuteStep}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition"
+            className="flex items-center justify-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition w-full sm:w-auto"
           >
-            <Play className="w-4 h-4 fill-white" />
+            <Play className="w-4 h-4 fill-white shrink-0" />
             {currentStep.actionLabel}
           </button>
         </div>

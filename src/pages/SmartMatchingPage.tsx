@@ -411,8 +411,8 @@ export const SmartMatchingPage: React.FC = () => {
                 </div>
 
                 {/* Right: Compatibility Score Badge */}
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
+                <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-0 border-slate-100">
+                  <div className="text-left sm:text-right">
                     <span className="text-[10px] uppercase font-bold text-slate-400 block">
                       Compatibility Score
                     </span>
@@ -424,16 +424,16 @@ export const SmartMatchingPage: React.FC = () => {
 
                   <button
                     onClick={() => handleSimulateRequestClick(match)}
-                    className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition"
+                    className="flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    Simulate Buyer Request
+                    Simulate Request
                   </button>
                 </div>
               </div>
 
               {/* Economic Breakdown Bar */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase font-bold">Gross Est. Value</span>
                   <p className="font-bold text-slate-900 text-sm">
@@ -476,7 +476,7 @@ export const SmartMatchingPage: React.FC = () => {
               </div>
 
               {/* Detailed Score Weights Breakdown */}
-              <div className="grid grid-cols-5 gap-2 text-[11px] text-slate-600 pt-1">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5 sm:gap-2 text-[11px] text-slate-600 pt-1">
                 <div className="p-2 bg-slate-50 rounded-lg">
                   <span className="text-slate-400 block text-[10px]">Material Fit</span>
                   <strong className="text-slate-800">{match.breakdown.materialPathwayScore}/100</strong>

@@ -87,7 +87,7 @@ export const BuyerNetworkPage: React.FC = () => {
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-emerald-700" />
                 Industry Buyer Network

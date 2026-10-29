@@ -132,7 +132,7 @@ export const AddBatchPage: React.FC = () => {
         </div>
 
         {/* Multi-Section Progress Steps */}
-        <div className="grid grid-cols-4 gap-2 mt-6 pt-5 border-t border-slate-100">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-slate-100">
           <button
             type="button"
             onClick={() => setCurrentSection('supplier')}
@@ -142,10 +142,10 @@ export const AddBatchPage: React.FC = () => {
                 : 'text-slate-500 hover:bg-slate-50'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] shrink-0">
               A
             </span>
-            <span>Supplier</span>
+            <span className="truncate">Supplier</span>
           </button>
 
           <button
@@ -159,10 +159,10 @@ export const AddBatchPage: React.FC = () => {
                 : 'text-slate-500 hover:bg-slate-50'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] shrink-0">
               B
             </span>
-            <span>Material & Labs</span>
+            <span className="truncate">Material & Labs</span>
           </button>
 
           <button
@@ -176,10 +176,10 @@ export const AddBatchPage: React.FC = () => {
                 : 'text-slate-500 hover:bg-slate-50'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] shrink-0">
               C
             </span>
-            <span>Preferred Route</span>
+            <span className="truncate">Route</span>
           </button>
 
           <button
@@ -193,16 +193,16 @@ export const AddBatchPage: React.FC = () => {
                 : 'text-slate-500 hover:bg-slate-50'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] shrink-0">
               D
             </span>
-            <span>Review & Save</span>
+            <span className="truncate">Review</span>
           </button>
         </div>
       </div>
 
       {/* Form Container */}
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-6">
         {/* SECTION A: SUPPLIER INFORMATION */}
         {currentSection === 'supplier' && (
           <div className="space-y-4 animate-fadeIn">

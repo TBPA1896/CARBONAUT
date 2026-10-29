@@ -23,6 +23,7 @@ import './App.css';
 export const App: React.FC = () => {
   const [isResetOpen, setIsResetOpen] = useState(false);
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     storageService.initStorage();
@@ -31,10 +32,12 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="flex min-h-screen bg-slate-50 text-slate-800 antialiased font-sans">
-        {/* Left Persistent Navigation Sidebar */}
+        {/* Left Persistent Navigation Sidebar with Mobile Drawer support */}
         <Sidebar
           onOpenReset={() => setIsResetOpen(true)}
           onOpenScenario={() => setIsScenarioOpen(true)}
+          isOpenMobile={isMobileSidebarOpen}
+          onCloseMobile={() => setIsMobileSidebarOpen(false)}
         />
 
         {/* Main Content Area */}
@@ -43,10 +46,11 @@ export const App: React.FC = () => {
           <Navbar
             onOpenReset={() => setIsResetOpen(true)}
             onOpenScenario={() => setIsScenarioOpen(true)}
+            onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           />
 
           {/* Main Route Content */}
-          <main className="flex-1 p-6 max-w-7xl w-full mx-auto">
+          <main className="flex-1 p-3.5 sm:p-6 max-w-7xl w-full mx-auto">
             <Routes>
               <Route path="/" element={<OverviewPage />} />
               <Route path="/overview" element={<Navigate to="/" replace />} />

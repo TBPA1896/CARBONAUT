@@ -101,9 +101,9 @@ export const InventoryPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs">
+        <div className="min-w-0">
+          <h1 className="text-xl font-bold text-slate-900 flex flex-wrap items-center gap-2">
             <Boxes className="w-5 h-5 text-emerald-700" />
             Residue Inventory
             <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
@@ -114,10 +114,10 @@ export const InventoryPage: React.FC = () => {
             Standardized agricultural and agro-processing residues across Telangana
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-col sm:flex-row gap-2.5">
           <button
             onClick={handleExportCsv}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer"
             title="Download CSV report of current inventory"
           >
             <Download className="w-3.5 h-3.5" />
@@ -125,7 +125,7 @@ export const InventoryPage: React.FC = () => {
           </button>
           <Link
             to="/add-batch"
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition"
+            className="flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-xs transition"
           >
             <PlusCircle className="w-4 h-4" />
             Add New Batch
@@ -250,8 +250,135 @@ export const InventoryPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Batch Records Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+      {/* MOBILE ADAPTIVE VIEW (Screens < md) */}
+      <div className="md:hidden space-y-3">
+        {sorted.map((batch) => (
+          <div
+            key={`mobile-${batch.id}`}
+            className="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs space-y-3"
+          >
+            {/* Top row: ID, Date & Status */}
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <span className="font-mono font-bold text-slate-900 text-xs">{batch.id}</span>
+                <span className="text-[10px] text-slate-400 block">Available: {batch.availableDate}</span>
+              </div>
+              <select
+                value={batch.status}
+                onChange={(e) => handleStatusChange(batch.id, e.target.value as BatchStatus)}
+                className={`text-[11px] font-semibold px-2 py-0.5 rounded-lg border focus:outline-none ${
+                  batch.status === 'Available'
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                    : batch.status === 'Matched'
+                    ? 'bg-blue-50 text-blue-800 border-blue-300'
+                    : batch.status === 'Pickup Scheduled'
+                    ? 'bg-purple-50 text-purple-800 border-purple-300'
+                    : batch.status === 'Delivered'
+                    ? 'bg-slate-100 text-slate-700 border-slate-300'
+                    : 'bg-amber-50 text-amber-800 border-amber-300'
+                }`}
+              >
+                <option value="Available">Available</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Matched">Matched</option>
+                <option value="Pickup Scheduled">Pickup Scheduled</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </div>
+
+            {/* Material & Supplier Info */}
+            <div>
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-slate-900 text-sm">{batch.residueType}</h4>
+                <span className="font-black text-emerald-800 text-sm">{batch.quantityTonnes} Tonnes</span>
+              </div>
+              <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                {batch.supplierName} • {batch.district} ({batch.estimatedCollectionDistanceKm} km)
+              </p>
+              <div className="mt-1">
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-100 inline-block">
+                  Route: {batch.preferredRoute}
+                </span>
+              </div>
+            </div>
+
+            {/* Quality Assay Indicators */}
+            <div className="grid grid-cols-3 gap-1.5 p-2 bg-slate-50 rounded-lg text-center text-[10px]">
+              <div>
+                <span className="text-slate-400 block">Moisture</span>
+                <strong className="text-slate-800">
+                  {batch.moisturePercent !== null ? `${batch.moisturePercent}%` : 'Unmeasured'}
+                </strong>
+              </div>
+              <div>
+                <span className="text-slate-400 block">Ash</span>
+                <strong className="text-slate-800">
+                  {batch.ashPercent !== null ? `${batch.ashPercent}%` : 'Unmeasured'}
+                </strong>
+              </div>
+              <div>
+                <span className="text-slate-400 block">Carbon</span>
+                <strong className="text-slate-800">
+                  {batch.carbonContentPercent !== null ? `${batch.carbonContentPercent}%` : 'Unmeasured'}
+                </strong>
+              </div>
+            </div>
+
+            {/* Confidence & Actions */}
+            <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+              <div>
+                {batch.dataConfidence === 'High' ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800">
+                    <CheckCircle2 className="w-3 h-3" />
+                    Verified Labs
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-800">
+                    <AlertTriangle className="w-3 h-3" />
+                    Provisional
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setSelectedBatch(batch)}
+                  className="px-2 py-1 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold"
+                >
+                  Details
+                </button>
+                <button
+                  onClick={() =>
+                    navigate('/matching', { state: { selectedBatchId: batch.id } })
+                  }
+                  className="px-2.5 py-1 text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg text-xs font-bold"
+                >
+                  Match
+                </button>
+                <button
+                  onClick={() => setEditingBatch({ ...batch })}
+                  className="p-1 text-slate-400 hover:text-blue-700 rounded-lg"
+                  title="Edit"
+                >
+                  <Edit2 className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => setBatchToDelete(batch)}
+                  className="p-1 text-slate-400 hover:text-red-700 rounded-lg"
+                  title="Delete"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* DESKTOP BATCH RECORDS TABLE (Screens >= md) */}
+      <div className="hidden md:block bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>

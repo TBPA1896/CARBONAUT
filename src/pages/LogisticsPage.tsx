@@ -99,14 +99,14 @@ export const LogisticsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-start sm:items-center gap-3 min-w-0">
             <div className="p-3 bg-emerald-50 rounded-xl text-emerald-700">
               <Truck className="w-6 h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-xl font-bold text-slate-900">Collection & Logistics</h1>
                 <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
                   Simulated Dispatch
@@ -306,9 +306,9 @@ export const LogisticsPage: React.FC = () => {
         </form>
       </div>
 
-      {/* ACTIVE LOGISTICS TRIPS TABLE */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+      {/* ACTIVE LOGISTICS TRIPS SECTION */}
+      <div className="space-y-3">
+        <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-between">
           <div>
             <h3 className="font-bold text-slate-900 text-base">Active Simulated Logistics Trips</h3>
             <p className="text-xs text-slate-500">
@@ -320,6 +320,71 @@ export const LogisticsPage: React.FC = () => {
           </span>
         </div>
 
+        {/* MOBILE ADAPTIVE VIEW (Screens < md) */}
+        <div className="md:hidden space-y-3">
+        {trips.map((trip) => (
+          <div
+            key={`log-m-${trip.id}`}
+            className="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs space-y-3"
+          >
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <span className="font-mono font-bold text-slate-900 text-xs">{trip.id}</span>
+                <span className="text-[10px] text-slate-400 block">{trip.vehicleType}</span>
+              </div>
+              <select
+                value={trip.status}
+                onChange={(e) =>
+                  handleStatusChange(
+                    trip.id,
+                    e.target.value as 'Proposed' | 'Scheduled' | 'Picked Up' | 'Delivered'
+                  )
+                }
+                className={`text-[11px] font-semibold px-2 py-0.5 rounded-lg border focus:outline-none ${
+                  trip.status === 'Delivered'
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
+                    : trip.status === 'Picked Up'
+                    ? 'bg-purple-50 text-purple-800 border-purple-300'
+                    : trip.status === 'Scheduled'
+                    ? 'bg-blue-50 text-blue-800 border-blue-300'
+                    : 'bg-amber-50 text-amber-800 border-amber-300'
+                }`}
+              >
+                <option value="Proposed">Proposed</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Picked Up">Picked Up</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900 text-sm">{trip.transporterName}</span>
+                <span className="font-bold text-slate-900 text-sm">₹{trip.transportCostInr.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">
+                Load: {trip.totalLoadTonnes} t / {trip.vehicleCapacityTonnes} t (₹{trip.transportCostPerKgInr}/kg)
+              </div>
+            </div>
+
+            <div className="p-2.5 bg-slate-50 rounded-lg text-xs space-y-1">
+              <div className="text-slate-600">From: <span className="font-medium text-slate-800">{trip.originLocations.join(', ')}</span></div>
+              <div className="text-emerald-800 font-semibold flex items-center gap-1">
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                To: {trip.destinationLocation} ({trip.totalDistanceKm} km)
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100 text-slate-500">
+              <span>Driver: <strong className="text-slate-800">{trip.driverName}</strong></span>
+              <span>Pickup: {trip.pickupDate}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* DESKTOP LOGISTICS TRIPS TABLE (Screens >= md) */}
+      <div className="hidden md:block bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
@@ -408,5 +473,8 @@ export const LogisticsPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
+
+export default LogisticsPage;
